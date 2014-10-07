@@ -2,6 +2,8 @@ var express = require('express');
 var util = require('./lib/utility');
 var partials = require('express-partials');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 
 
 var db = require('./app/config');
@@ -21,29 +23,32 @@ app.use(bodyParser.json());
 // Parse forms (signup/login)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
+//Middleware for authentication
+app.use(cookieParser('The Secret. keep it secret.'));
+app.use(session());
 
 
-app.all('*', function(req, res, next){
-  //see if req has login info
-  console.log('checking request login info.  username:', req.body.username);
-   if (!req.body.username){
-    res.render('login');
-   }else{
-    next();
-   }
-});
+// app.all('*', function(req, res, next){
+//   //see if req has login info
+//   console.log('checking request login info.  username:', req.body.username);
+//    if (!req.body.username){
+//     res.render('login');
+//    }else{
+//     next();
+//    }
+// });
 
-app.get('/',
+app.get('/', util.checkSession,
 function(req, res) {
   res.render('index');
 });
 
-app.get('/create',
+app.get('/create', util.checkSession,
 function(req, res) {
   res.render('index');
 });
 
-app.get('/links',
+app.get('/links', util.checkSession,
 function(req, res) {
   Links.reset().fetch().then(function(links) {
     res.send(200, links.models);

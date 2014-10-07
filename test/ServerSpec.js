@@ -206,9 +206,10 @@ describe('FIRST TEST', function() {
       });
 
       xit('Returns all of the links to display on the links page', function(done) {
+        //!!!!!!!!!!!!!!!!!!!!!!!
         //Adding json with username and passowrd made the tests fail. unable to assert
-        //that body contains link.  Did not debug very seriously but expect
-        //that there is an issue with request module not playing nice with chai.
+        //that body contains url.  Did not debug very seriously but expect
+        //that there is an issue with request module, or json parser not playing nice with chai.
 
         var options = {
           'method': 'GET',
