@@ -23,9 +23,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
 
+app.all('*', function(req, res, next){
+  //see if req has login info
+  console.log('checking request login info.  username:', req.body.username);
+   if (!req.body.username){
+    res.render('login');
+   }else{
+    next();
+   }
+});
+
 app.get('/',
 function(req, res) {
-  //see if req has login
   res.render('index');
 });
 
@@ -95,7 +104,8 @@ app.post('/signup',
 
     new User(req.body).save().then(function(newUser) {
         Users.add(newUser);
-        res.send(201);
+        //redirect to '/' once signed up
+        res.redirect(302, '/');
     });
   });
 /************************************************************/
