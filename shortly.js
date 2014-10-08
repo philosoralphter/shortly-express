@@ -104,6 +104,33 @@ function(req, res) {
   res.render('signup');
 });
 
+//added this route for signing in to an account.
+//oh and it's not working and crashing all the tests
+
+// app.post('/login',
+//   function(req, res) {
+//     var username = req.body.username;
+//     var password = req.body.password;
+//     new User ({username : username}).fetch().then(function(user){
+//       if (!user) {
+//         res.redirect('/');
+//       }else{
+//         user.checkPassword(password, function(accessGranted){
+
+//           if (accessGranted){
+//             createSession(req, res, user);
+//             next();
+
+//           }else{
+//           console.log('incorrect password for user: ', req.body.username);
+//           console.log('unable to authenticate');
+//           res.redirect('/login');
+//           }
+//         });
+//       }
+//     });
+//   });
+
 app.post('/signup',
   function(req, res) {
 
@@ -112,6 +139,9 @@ app.post('/signup',
         //redirect to '/' once signed up
         res.redirect(302, '/');
     });
+
+
+
   });
 /************************************************************/
 // Handle the wildcard route last - if all other routes fail

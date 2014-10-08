@@ -22,6 +22,15 @@ var User = db.Model.extend({
         })
       })
     });
+  },
+
+  checkPassword: function(pwd, cb){
+
+    //compare found user's password to pwd
+    bcrypt.compare(pwd, this.get('password'), function(err, result){
+      if (err) console.log(err);
+      else cb(res);
+    });
   }
 
 

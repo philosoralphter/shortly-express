@@ -17,7 +17,7 @@ var xbeforeEach = function(){};
 /************************************************************/
 
 
-describe('FIRST TEST', function() {
+describe('', function() {
 
   beforeEach(function() {
     // log out currently signed in user
@@ -310,7 +310,7 @@ describe('FIRST TEST', function() {
 
   }); // 'Account Creation'
 
-  xdescribe('Account Login:', function(){
+  describe('Account Login:', function(){
 
     var requestWithSession = request.defaults({jar: true});
 
